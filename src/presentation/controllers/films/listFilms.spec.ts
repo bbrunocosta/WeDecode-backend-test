@@ -1,5 +1,6 @@
+import InternalServerError from '../../errors/internalServerError'
 import ListFilmsController from './listFilms.controller'
-import { fakeFilmData, fakeHttpRequest, FilmRepositoryStub } from './filmMocks'
+import { FakeErrorStub, fakeFilmData, fakeHttpRequest, fakeStack, FilmRepositoryStub } from './filmMocks'
 describe('ListFilms', () => {
   const filmRepositoryStub = new FilmRepositoryStub()
   const listfilms = new ListFilmsController(filmRepositoryStub)
@@ -7,5 +8,11 @@ describe('ListFilms', () => {
     const httpResponse = await listfilms.handle(fakeHttpRequest)
     expect(httpResponse.status).toBe(200)
     expect(httpResponse.body).toEqual([fakeFilmData])
+  })
+  test('Should return 500 if FilmRepository throws', async () => {
+    jest.spyOn(filmRepositoryStub, 'getAll').mockImplementationOnce(() => { throw new FakeErrorStub() })
+    const httpResponse = await listfilms.handle(fakeHttpRequest)
+    expect(httpResponse.status).toBe(500)
+    expect(httpResponse.body).toEqual(new InternalServerError(fakeStack))
   })
 })
