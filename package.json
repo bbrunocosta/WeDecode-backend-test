@@ -5,6 +5,14 @@
   "repository": "https://github.com/bbrunocosta/WeDecode-backend-test.git",
   "author": "Bruno Costa <b.brunocosta@outlook.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:verbose": "jest --passWithNoTests",
+    "test:unit": "yarn test --watch -c jest-unit.config.ts",
+    "test:integration": "yarn test --watch -c jest-integration.config.ts",
+    "test:staged": "yarn test",
+    "test:ci": "yarn jest --coverage"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.24",
     "@types/node": "^16.4.3",
