@@ -1,4 +1,4 @@
-import { SpectatorRepository } from '../../../data/protocols/spectators/spectator.repository.prototol'
+import { SpectatorRepository } from '../../../data/protocols/spectators/spectator.repository.protocol'
 import InternalServerError from '../../errors/internalServerError'
 import { serverError, success } from '../../helpers/httpResponse.helper'
 import { HttpRequest, HttpResponse } from '../../protocols/http.protocol'

@@ -1,4 +1,4 @@
-import { SpectatorRepository } from '../../../data/protocols/spectators/spectator.repository.prototol'
+import { SpectatorRepository } from '../../../data/protocols/spectators/spectator.repository.protocol'
 import { Spectator } from '../../../domain/spectator'
 
 export const fakeSpectatorData: Spectator = {
