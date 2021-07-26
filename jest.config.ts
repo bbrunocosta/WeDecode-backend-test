@@ -4,7 +4,8 @@ export default {
   coverageReporters: ['json', 'html'],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
-    '!<rootDir>/src/**/*.js'
+    '!<rootDir>/src/**/*.js',
+    '!<rootDir>/**/*.protocol.ts'
   ],
   testMatch: ['**/*.spec.ts', '**/*.test.ts'],
   coverageDirectory: 'coverage',
