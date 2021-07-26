@@ -37,4 +37,11 @@ describe('AddFilm', () => {
     expect(httpResponse.status).toBe(409)
     expect(httpResponse.body).toEqual(new FilmTitleAlreadyExistsError(fakeHttpRequest.body.title))
   })
+  test('Sould return 201 on success', async () => {
+    const addFilmSpy = jest.spyOn(addFilmRespoitoryStub, 'addFilm')
+    const httpResponse = await addFilmController.handle(fakeHttpRequest)
+    expect(addFilmSpy).toBeCalledWith(fakeHttpRequest.body)
+    expect(httpResponse.status).toBe(201)
+    expect(httpResponse.body).toEqual(fakeFilmData)
+  })
 })
