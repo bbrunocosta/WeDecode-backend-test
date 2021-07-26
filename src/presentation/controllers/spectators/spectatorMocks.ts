@@ -4,6 +4,7 @@ import { Spectator } from '../../../domain/spectator'
 export const fakeSpectatorData: Spectator = {
   id: 'a valid id',
   name: 'a valid name',
+  whatchedFilms: [],
   'created-at': 'valid timestamp'
 }
 export const fakeHttpRequest = {
@@ -19,7 +20,7 @@ export class FakeErrorStub extends Error {
   }
 }
 export class SpectatorRepositoryStub implements SpectatorRepository {
-  async addSpectator ({ name }: Omit<Spectator, 'id' | 'created-at'>): Promise<Spectator> {
+  async addSpectator ({ name }: Omit<Spectator, 'id' | 'whatchedFilms' |'created-at'>): Promise<Spectator> {
     return fakeSpectatorData
   }
 
@@ -29,5 +30,9 @@ export class SpectatorRepositoryStub implements SpectatorRepository {
 
   async getAll (): Promise<Spectator[] | []> {
     return [fakeSpectatorData]
+  }
+
+  async addWatchedFilm (spectatorDd: string, filmId: string): Promise<Spectator | null> {
+    return null
   }
 }
