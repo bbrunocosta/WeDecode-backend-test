@@ -35,4 +35,8 @@ export class SpectatorRepositoryStub implements SpectatorRepository {
   async addWatchedFilm (spectatorDd: string, filmId: string): Promise<Spectator | null> {
     return null
   }
+
+  async findOneById (id: string): Promise<Spectator | null> {
+    return fakeSpectatorData
+  }
 }
