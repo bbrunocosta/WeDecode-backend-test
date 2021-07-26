@@ -5,6 +5,7 @@ export const fakeFilmData: Film = {
   id: 'a valid id',
   title: 'a valid title',
   author: 'a valid author',
+  viewersAmount: 0,
   director: 'a valid director',
   'created-at': 'valid timestamp'
 }
@@ -33,5 +34,9 @@ export class FilmRepositoryStub implements FilmRepository {
 
   async getAll (): Promise<Film[] | []> {
     return [fakeFilmData]
+  }
+
+  async findOneById (): Promise<Film | null> {
+    return fakeFilmData
   }
 }
