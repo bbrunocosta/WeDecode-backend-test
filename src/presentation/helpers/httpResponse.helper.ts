@@ -20,7 +20,3 @@ export const created = (body: any): HttpResponse => ({
   status: 201,
   body
 })
-export const noContent = (body: any): HttpResponse => ({
-  status: 204,
-  body
-})
