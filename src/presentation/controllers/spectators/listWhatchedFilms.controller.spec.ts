@@ -48,4 +48,10 @@ describe('ListWatchedFilmsController', () => {
     await listWatchedFilmsController.handle(fakeHttpRequest)
     expect(findOneByIdSpy).toHaveBeenCalledWith(fakeHttpRequest.params.id)
   })
+  test('should return 400 if spectator not exists on database', async () => {
+    jest.spyOn(spectatorRepositoryStub, 'findOneById').mockReturnValueOnce(Promise.resolve(null))
+    const httpResponse = await listWatchedFilmsController.handle(fakeHttpRequest)
+    expect(httpResponse.status).toEqual(400)
+    expect(httpResponse.body).toEqual(new SpectatorNotFoundError(fakeHttpRequest.params.id))
+  })
 })
