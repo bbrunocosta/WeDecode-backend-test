@@ -6,7 +6,7 @@ export const spectatorSchema = new Schema<Spectator>({
   whatchedFilms: {
     type: [{
       type: Schema.Types.ObjectId,
-      ref: 'films'
+      ref: 'Films'
     }],
     default: []
   },

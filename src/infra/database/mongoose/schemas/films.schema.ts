@@ -7,7 +7,7 @@ export const filmSchema = new Schema<Film>({
   director: String,
   spectators: [{
     type: Schema.Types.ObjectId,
-    ref: 'spectators'
+    ref: 'Spectators'
   }],
   viewersAmount: {
     type: Number,
