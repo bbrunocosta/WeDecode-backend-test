@@ -7,4 +7,9 @@ describe('Required Fields Validation', () => {
     const error = sut.validate({ name: 'any' })
     expect(error).toEqual(new MissingParamError('email'))
   })
+  test('Should return undefined  if the param is not missing', () => {
+    const sut = new RequiredFieldsValidation('email')
+    const error = sut.validate({ email: 'any' })
+    expect(error).toBeFalsy()
+  })
 })
