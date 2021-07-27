@@ -45,4 +45,9 @@ describe('MongoSpectatorRepositoryAdapter', () => {
     expect(result2).toBeTruthy()
     expect(result2?.name).toBe(fakeSpectatorRequest2.name)
   })
+  test('findOneById should return null if Spectator was not found', async () => {
+    const result3 = await spectatorRepository.findOneById('51bb793aca2ab77a3200000d')
+    expect(result3).toBeFalsy()
+    expect(result3).toBe(null)
+  })
 })
