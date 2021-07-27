@@ -25,7 +25,6 @@ class ListViwersAmountController implements Controller {
         spectators: film.spectators
       })
     } catch (err) {
-      console.log(err)
       return serverError(new InternalServerError(err.stack))
     }
   }

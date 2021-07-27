@@ -17,8 +17,6 @@ class MongoSpectatorRepositoryAdapter implements SpectatorRepository {
 
   async findOneByName (name: string): Promise<Spectator | null> {
     const spectator = await SpectatorModel.findOne({ name })
-    console.log(name)
-    console.log(spectator)
     return spectator ? mapSpectator(spectator) : null
   }
 
