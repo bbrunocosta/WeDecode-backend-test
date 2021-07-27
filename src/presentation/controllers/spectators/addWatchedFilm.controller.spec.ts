@@ -1,9 +1,10 @@
+import FilmIsAlreadyOnWatchedListError from '../../errors/FilmIsAlreadyOnWatchedListError'
 import FilmNotFoundError from '../../errors/filmNotFoundError'
 import InternalServerError from '../../errors/internalServerError'
 import SpectatorNotFoundError from '../../errors/spectatorNotFoundError'
-import { FilmRepositoryStub } from '../films/filmMocks'
+import { FilmRepositoryStub, ValidationStub } from '../films/filmMocks'
 import AddWatchedFilmController from './addWatchedFilm.controller'
-import { FakeErrorStub, fakeStack, SpectatorRepositoryStub } from './spectatorMocks'
+import { FakeErrorStub, fakeSpectatorData, fakeStack, SpectatorRepositoryStub } from './spectatorMocks'
 const fakeHttpRequest = {
   params: {
     id: 'valid Spectator ID'
@@ -15,7 +16,9 @@ const fakeHttpRequest = {
 describe('AddWatchedFilmController', () => {
   const spectatorRepositoryStub = new SpectatorRepositoryStub()
   const filmRepositoryStub = new FilmRepositoryStub()
-  const addWatchedFilmController = new AddWatchedFilmController(spectatorRepositoryStub, filmRepositoryStub)
+  const bodyValidationStub = new ValidationStub()
+  const paramValidationStub = new ValidationStub()
+  const addWatchedFilmController = new AddWatchedFilmController(spectatorRepositoryStub, filmRepositoryStub, paramValidationStub, bodyValidationStub)
   test('Should return 400 if Spectator was not found', async () => {
     const addWatchedFilmSpy = jest.spyOn(spectatorRepositoryStub, 'addWatchedFilm')
     addWatchedFilmSpy.mockImplementationOnce(() => { throw new SpectatorNotFoundError('spectator id') })
@@ -52,5 +55,10 @@ describe('AddWatchedFilmController', () => {
     const httpResponse = await addWatchedFilmController.handle(fakeHttpRequest)
     expect(httpResponse.status).toBe(500)
     expect(httpResponse.body).toEqual(new InternalServerError(fakeStack))
+  })
+  test('should call validate with correct values', async () => {
+    const validateSpy = jest.spyOn(bodyValidationStub, 'validate')
+    await addWatchedFilmController.handle(fakeHttpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(fakeHttpRequest.body)
   })
 })
