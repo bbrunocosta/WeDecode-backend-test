@@ -67,4 +67,9 @@ describe('AddWatchedFilmController', () => {
     expect(httpResponse.status).toBe(400)
     expect(httpResponse.body).toEqual(new Error('any'))
   })
+  test('sould call validate with correct values', async () => {
+    const validateSpy = jest.spyOn(paramValidationStub, 'validate')
+    await addWatchedFilmController.handle(fakeHttpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(fakeHttpRequest.params)
+  })
 })
