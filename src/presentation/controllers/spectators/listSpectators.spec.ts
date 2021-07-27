@@ -9,6 +9,12 @@ describe('ListSpectators', () => {
     expect(httpResponse.status).toBe(200)
     expect(httpResponse.body).toEqual([fakeSpectatorData])
   })
+  test('Should return an empty array of no spectator was found success', async () => {
+    jest.spyOn(spectatorRepositoryStub, 'getAll').mockReturnValueOnce(Promise.resolve([]))
+    const httpResponse = await listSpectatorsController.handle(fakeHttpRequest)
+    expect(httpResponse.status).toBe(200)
+    expect(httpResponse.body.length).toEqual(0)
+  })
   test('Should return 500 if SpectatorRepository throws', async () => {
     jest.spyOn(spectatorRepositoryStub, 'getAll').mockImplementationOnce(() => { throw new FakeErrorStub() })
     const httpResponse = await listSpectatorsController.handle(fakeHttpRequest)
