@@ -48,4 +48,9 @@ describe('MongooseFilmRepositoryAdapter', () => {
     expect(result2).toBeTruthy()
     expect(result2?.author).toBe(fakeFilmRequest2.author)
   })
+  test('findOneById should return null if film was not found', async () => {
+    const result3 = await filmRepository.findOneById('51bb793aca2ab77a3200000d')
+    expect(result3).toBeFalsy()
+    expect(result3).toBe(null)
+  })
 })
