@@ -7,5 +7,5 @@ import { makeListViwersAmountController } from '../factories/makeListViwersAmoun
 export default (router: Router): void => {
   router.post('/films', adaptRoute(makeAddFilmController()))
   router.get('/films', adaptRoute(makeListFilmsController()))
-  router.get('/films/viewers-amount/:id', adaptRoute(makeListViwersAmountController()))
+  router.get('/films/audience/:id', adaptRoute(makeListViwersAmountController()))
 }
