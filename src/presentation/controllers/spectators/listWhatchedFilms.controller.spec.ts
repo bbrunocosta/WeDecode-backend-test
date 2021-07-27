@@ -1,8 +1,8 @@
 import InternalServerError from '../../errors/internalServerError'
 import SpectatorNotFoundError from '../../errors/spectatorNotFoundError'
-import { ValidationStub } from '../films/filmMocks'
+import { ValidationStub } from '../films/films.stubs.fakedata'
 import ListWatchedFilmsController from './listWatchedFilms.controller'
-import { FakeErrorStub, fakeSpectatorData, fakeStack, SpectatorRepositoryStub } from './spectatorMocks'
+import { FakeErrorStub, fakeSpectatorData, fakeStack, SpectatorRepositoryStub } from './spectators.stubs.fakedata'
 describe('ListWatchedFilmsController', () => {
   const fakeHttpRequest = {
     params: {

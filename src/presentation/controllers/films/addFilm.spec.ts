@@ -2,7 +2,7 @@ import FilmTitleAlreadyExistsError from '../../errors/filmTitleAlreadyExistsErro
 import InternalServerError from '../../errors/internalServerError'
 import MissingParamError from '../../errors/MissingParamError'
 import AddFilmController from './addFilm.controller'
-import { FakeErrorStub, fakeFilmData, fakeHttpRequest, fakeStack, FilmRepositoryStub, ValidationStub } from './filmMocks'
+import { FakeErrorStub, fakeFilmData, fakeHttpRequest, fakeStack, FilmRepositoryStub, ValidationStub } from './films.stubs.fakedata'
 
 describe('AddFilm', () => {
   const filmRespoitoryStub = new FilmRepositoryStub()

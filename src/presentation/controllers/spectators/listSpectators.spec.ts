@@ -1,6 +1,6 @@
 import InternalServerError from '../../errors/internalServerError'
 import ListSpectatorsController from './listSpectators.controller'
-import { FakeErrorStub, fakeSpectatorData, fakeHttpRequest, fakeStack, SpectatorRepositoryStub } from './spectatorMocks'
+import { FakeErrorStub, fakeSpectatorData, fakeHttpRequest, fakeStack, SpectatorRepositoryStub } from './spectators.stubs.fakedata'
 describe('ListSpectators', () => {
   const spectatorRepositoryStub = new SpectatorRepositoryStub()
   const listSpectatorsController = new ListSpectatorsController(spectatorRepositoryStub)

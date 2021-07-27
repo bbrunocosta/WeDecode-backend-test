@@ -1,6 +1,6 @@
 import InternalServerError from '../../errors/internalServerError'
 import ListFilmsController from './listFilms.controller'
-import { FakeErrorStub, fakeFilmData, fakeHttpRequest, fakeStack, FilmRepositoryStub } from './filmMocks'
+import { FakeErrorStub, fakeFilmData, fakeHttpRequest, fakeStack, FilmRepositoryStub } from './films.stubs.fakedata'
 describe('ListFilms', () => {
   const filmRepositoryStub = new FilmRepositoryStub()
   const listfilms = new ListFilmsController(filmRepositoryStub)

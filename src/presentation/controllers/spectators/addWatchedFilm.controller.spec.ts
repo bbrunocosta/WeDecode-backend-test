@@ -2,9 +2,9 @@ import FilmIsAlreadyOnWatchedListError from '../../errors/FilmIsAlreadyOnWatched
 import FilmNotFoundError from '../../errors/filmNotFoundError'
 import InternalServerError from '../../errors/internalServerError'
 import SpectatorNotFoundError from '../../errors/spectatorNotFoundError'
-import { FilmRepositoryStub, ValidationStub } from '../films/filmMocks'
+import { FilmRepositoryStub, ValidationStub } from '../films/films.stubs.fakedata'
 import AddWatchedFilmController from './addWatchedFilm.controller'
-import { FakeErrorStub, fakeSpectatorData, fakeStack, SpectatorRepositoryStub } from './spectatorMocks'
+import { FakeErrorStub, fakeSpectatorData, fakeStack, SpectatorRepositoryStub } from './spectators.stubs.fakedata'
 const fakeHttpRequest = {
   params: {
     id: 'valid Spectator ID'

@@ -1,8 +1,8 @@
 import InternalServerError from '../../errors/internalServerError'
 import SpectatorAlreadyExistsError from '../../errors/spectatorAlreadyExists'
-import { ValidationStub } from '../films/filmMocks'
+import { ValidationStub } from '../films/films.stubs.fakedata'
 import AddSpectatorController from './addSpectator.controller'
-import { FakeErrorStub, fakeSpectatorData, fakeHttpRequest, fakeStack, SpectatorRepositoryStub } from './spectatorMocks'
+import { FakeErrorStub, fakeSpectatorData, fakeHttpRequest, fakeStack, SpectatorRepositoryStub } from './spectators.stubs.fakedata'
 
 describe('AddSpectator', () => {
   const spectatorRespoitoryStub = new SpectatorRepositoryStub()

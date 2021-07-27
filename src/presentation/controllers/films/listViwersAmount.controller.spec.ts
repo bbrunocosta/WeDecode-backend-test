@@ -1,6 +1,6 @@
 import FilmNotFoundError from '../../errors/filmNotFoundError'
 import InternalServerError from '../../errors/internalServerError'
-import { FakeErrorStub, fakeFilmData, fakeStack, FilmRepositoryStub, ValidationStub } from './filmMocks'
+import { FakeErrorStub, fakeFilmData, fakeStack, FilmRepositoryStub, ValidationStub } from './films.stubs.fakedata'
 import ListViwersAmountController from './listViwersAmount.controller'
 describe('ListFilms', () => {
   const fakeHttpRequest = {
