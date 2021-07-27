@@ -25,4 +25,10 @@ describe('MongoSpectatorRepositoryAdapter', () => {
     expect(result.id).toBeTruthy()
     expect(result.whatchedFilms.length).toBe(0)
   })
+  test('getAll should return a list of Spectators', async () => {
+    await spectatorRepository.addSpectator(fakeSpectatorRequest)
+    await spectatorRepository.addSpectator(fakeSpectatorRequest2)
+    const result = await spectatorRepository.getAll()
+    expect(result.length).toBe(2)
+  })
 })
