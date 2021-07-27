@@ -1,6 +1,6 @@
 import MongooseFilmRepositoryAdapter from '../../infra/database/mongoose/adapters/filmRepository.adapter'
 import AddFilmController from '../../presentation/controllers/films/addFilm.controller'
-import { Controller } from '../../presentation/protocols/controller'
+import { Controller } from '../../presentation/protocols/controller.protocol'
 
 export const makeAddFilmController = (): Controller => {
   const mongooseFilmRepositoryAdapter = new MongooseFilmRepositoryAdapter()
