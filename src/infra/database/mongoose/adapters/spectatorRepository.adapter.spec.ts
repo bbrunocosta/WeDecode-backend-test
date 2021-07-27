@@ -64,4 +64,21 @@ describe('MongoSpectatorRepositoryAdapter', () => {
     const result = await spectatorRepository.findOneByName('not regitered name')
     expect(result).toBe(null)
   })
+  test('addWhactchedFilm  should add a filmId to whatedFilms array', async () => {
+    const film = await filmRepository.addFilm({
+      title: 'a title',
+      author: 'an author',
+      director: 'a director'
+    })
+    const film2 = await filmRepository.addFilm({
+      title: 'a title2',
+      author: 'an author2',
+      director: 'a director2'
+    })
+    const fakeSpectator = await spectatorRepository.addSpectator(fakeSpectatorRequest2)
+    const updatedSpectator = await spectatorRepository.addWatchedFilm(fakeSpectator.id, film.id)
+    expect(updatedSpectator?.whatchedFilms.length).toBe(1)
+    const updatedSpectator2 = await spectatorRepository.addWatchedFilm(fakeSpectator.id, film2.id)
+    expect(updatedSpectator2?.whatchedFilms.length).toBe(2)
+  })
 })
