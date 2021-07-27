@@ -5,4 +5,5 @@ export interface FilmRepository{
   getAll: () => Promise<Film[] | []>
   findOneByTitle: (title: string) => Promise<Film | null>
   findOneById: (id: string) => Promise<Film | null>
+  addSpectator: (filmId: string, spectatorId: string) => Promise<Film | null>
 }
