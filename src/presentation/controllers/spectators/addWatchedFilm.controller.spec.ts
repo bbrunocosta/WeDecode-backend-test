@@ -84,4 +84,10 @@ describe('AddWatchedFilmController', () => {
     expect(httpResponse.status).toBe(400)
     expect(httpResponse.body).toEqual(new SpectatorNotFoundError(fakeHttpRequest.params.id))
   })
+  test('should not mark a film as watched twice', async () => {
+    jest.spyOn(spectatorRepositoryStub, 'findOneById').mockReturnValueOnce(Promise.resolve({ ...fakeSpectatorData, whatchedFilms: [fakeHttpRequest.body.filmId] }))
+    const httpResponse = await addWatchedFilmController.handle(fakeHttpRequest)
+    expect(httpResponse.status).toBe(409)
+    expect(httpResponse.body).toEqual(new FilmIsAlreadyOnWatchedListError())
+  })
 })
