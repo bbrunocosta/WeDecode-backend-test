@@ -31,4 +31,8 @@ describe('MongoSpectatorRepositoryAdapter', () => {
     const result = await spectatorRepository.getAll()
     expect(result.length).toBe(2)
   })
+  test('getAll should return empty array if any Spectator was found', async () => {
+    const result = await spectatorRepository.getAll()
+    expect(result).toEqual([])
+  })
 })
