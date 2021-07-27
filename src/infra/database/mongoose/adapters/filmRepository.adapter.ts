@@ -3,7 +3,7 @@ import { Film } from '../../../../domain/film'
 import { mapFilm } from '../helpers/map'
 import { FilmModel } from '../models/films.model'
 class MongooseFilmRepositoryAdapter implements FilmRepository {
-  async addFilm ({ title, author, director }: Omit<Film, 'id' | 'viewersAmount' | 'spectators' | 'created-at'>): Promise<Film> {
+  async addFilm ({ title, author, director }: Omit<Film, 'id' | 'spectators' | 'created-at'>): Promise<Film> {
     const film = new FilmModel({ title, author, director })
     const newFilm = await film.save()
     return mapFilm(newFilm)

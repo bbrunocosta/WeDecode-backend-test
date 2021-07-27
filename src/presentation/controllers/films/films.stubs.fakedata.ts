@@ -6,7 +6,6 @@ export const fakeFilmData: Film = {
   id: 'a valid id',
   title: 'a valid title',
   author: 'a valid author',
-  viewersAmount: 0,
   spectators: [],
   director: 'a valid director',
   'created-at': 'valid timestamp'

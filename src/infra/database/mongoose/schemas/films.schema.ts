@@ -9,10 +9,6 @@ export const filmSchema = new Schema<Film>({
     type: Schema.Types.ObjectId,
     ref: 'Spectators'
   }],
-  viewersAmount: {
-    type: Number,
-    default: 0
-  },
   'created-at': {
     type: Date,
     default: Date.now

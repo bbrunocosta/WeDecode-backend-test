@@ -16,7 +16,7 @@ describe('ListFilms', () => {
     const httpResponse = await listfilms.handle(fakeHttpRequest)
     expect(findOneByIdSpy).toHaveBeenCalledWith(fakeHttpRequest.params.id)
     expect(httpResponse.status).toBe(200)
-    expect(httpResponse.body).toEqual({ spectatorsAmount: fakeFilmData.viewersAmount, spectators: fakeFilmData.spectators })
+    expect(httpResponse.body).toEqual({ spectatorsAmount: fakeFilmData.spectators.length, spectators: fakeFilmData.spectators })
   })
   test('Should return 400 if film was not found', async () => {
     jest.spyOn(filmRepositoryStub, 'findOneById').mockReturnValueOnce(Promise.resolve(null))
