@@ -53,4 +53,12 @@ describe('MongooseFilmRepositoryAdapter', () => {
     expect(result3).toBeFalsy()
     expect(result3).toBe(null)
   })
+  test('findOneByTitle should return a film if it exists', async () => {
+    await filmRepository.addFilm(fakeFilmRequest2)
+    await filmRepository.addFilm(fakeFilmRequest1)
+    const result = await filmRepository.findOneByTitle('a tile')
+    if (result) {
+      expect(result.author).toBe('an author')
+    }
+  })
 })
