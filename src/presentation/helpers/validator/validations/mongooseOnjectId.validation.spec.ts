@@ -9,4 +9,10 @@ describe('Mongoose ObjectId Validation', () => {
     mongooseValidation.validate({ id })
     expect(isValidSpy).toHaveBeenCalledWith(id)
   })
+  test('Should return InvalidParamError isValidObjectId returns false', () => {
+    jest.spyOn(mongoose, 'isValidObjectId').mockReturnValueOnce(false)
+    const id = 'invalidid'
+    const result = mongooseValidation.validate({ id })
+    expect(result).toEqual(new InvalidParamError(id))
+  })
 })
