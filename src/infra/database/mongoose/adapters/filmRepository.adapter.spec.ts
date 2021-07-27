@@ -28,4 +28,10 @@ describe('MongooseFilmRepositoryAdapter', () => {
     expect(result.author).toBe(fakeFilmRequest1.author)
     expect(result.director).toBe(fakeFilmRequest1.director)
   })
+  test('getAll should return a list of films', async () => {
+    await filmRepository.addFilm(fakeFilmRequest1)
+    await filmRepository.addFilm(fakeFilmRequest2)
+    const result = await filmRepository.getAll()
+    expect(result.length).toBe(2)
+  })
 })
