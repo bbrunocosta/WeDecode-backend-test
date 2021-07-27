@@ -72,4 +72,10 @@ describe('AddWatchedFilmController', () => {
     await addWatchedFilmController.handle(fakeHttpRequest)
     expect(validateSpy).toHaveBeenCalledWith(fakeHttpRequest.params)
   })
+  test('sould return 400 if  validate returns error', async () => {
+    jest.spyOn(paramValidationStub, 'validate').mockReturnValueOnce(new Error('any'))
+    const httpResponse = await addWatchedFilmController.handle(fakeHttpRequest)
+    expect(httpResponse.status).toBe(400)
+    expect(httpResponse.body).toEqual(new Error('any'))
+  })
 })
