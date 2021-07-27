@@ -1,9 +1,13 @@
 import { Schema } from 'mongoose'
+import { Spectator } from '../../../../domain/spectator'
 
-export const spectatorSchema = new Schema({
+export const spectatorSchema = new Schema<Spectator>({
   name: String,
   whatchedFilms: {
-    type: [String],
+    type: [{
+      type: Schema.Types.ObjectId,
+      ref: 'films'
+    }],
     default: []
   },
   'created-at': {
