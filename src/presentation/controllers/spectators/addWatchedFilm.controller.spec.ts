@@ -78,4 +78,10 @@ describe('AddWatchedFilmController', () => {
     expect(httpResponse.status).toBe(400)
     expect(httpResponse.body).toEqual(new Error('any'))
   })
+  test('should return 400 if spectator was not found', async () => {
+    jest.spyOn(spectatorRepositoryStub, 'findOneById').mockReturnValueOnce(Promise.resolve(null))
+    const httpResponse = await addWatchedFilmController.handle(fakeHttpRequest)
+    expect(httpResponse.status).toBe(400)
+    expect(httpResponse.body).toEqual(new SpectatorNotFoundError(fakeHttpRequest.params.id))
+  })
 })
