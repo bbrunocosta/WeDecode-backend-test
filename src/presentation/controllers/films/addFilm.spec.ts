@@ -1,11 +1,13 @@
 import FilmTitleAlreadyExistsError from '../../errors/filmTitleAlreadyExistsError'
 import InternalServerError from '../../errors/internalServerError'
+import MissingParamError from '../../errors/MissingParamError'
 import AddFilmController from './addFilm.controller'
-import { FakeErrorStub, fakeFilmData, fakeHttpRequest, fakeStack, FilmRepositoryStub } from './filmMocks'
+import { FakeErrorStub, fakeFilmData, fakeHttpRequest, fakeStack, FilmRepositoryStub, ValidationStub } from './filmMocks'
 
 describe('AddFilm', () => {
   const filmRespoitoryStub = new FilmRepositoryStub()
-  const addFilmController = new AddFilmController(filmRespoitoryStub)
+  const validationStub = new ValidationStub()
+  const addFilmController = new AddFilmController(filmRespoitoryStub, validationStub)
   test('Should return 409 if film title already exists', async () => {
     const findOneByTitleSpy = jest.spyOn(filmRespoitoryStub, 'findOneByTitle')
     findOneByTitleSpy.mockReturnValueOnce(Promise.resolve(fakeFilmData))
@@ -26,5 +28,10 @@ describe('AddFilm', () => {
     const httpResponse = await addFilmController.handle(fakeHttpRequest)
     expect(httpResponse.status).toBe(500)
     expect(httpResponse.body).toEqual(new InternalServerError(fakeStack))
+  })
+  test('sould call validate with correct values', async () => {
+    const validateSpy = jest.spyOn(validationStub, 'validate')
+    await addFilmController.handle(fakeHttpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(fakeHttpRequest.body)
   })
 })
