@@ -43,4 +43,9 @@ describe('ListWatchedFilmsController', () => {
     expect(httpResponse.status).toBe(400)
     expect(httpResponse.body).toEqual(new Error('any'))
   })
+  test('should call findOneById with correct values', async () => {
+    const findOneByIdSpy = jest.spyOn(spectatorRepositoryStub, 'findOneById')
+    await listWatchedFilmsController.handle(fakeHttpRequest)
+    expect(findOneByIdSpy).toHaveBeenCalledWith(fakeHttpRequest.params.id)
+  })
 })
