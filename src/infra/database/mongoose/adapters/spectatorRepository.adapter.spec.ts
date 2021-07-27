@@ -81,4 +81,13 @@ describe('MongoSpectatorRepositoryAdapter', () => {
     const updatedSpectator2 = await spectatorRepository.addWatchedFilm(fakeSpectator.id, film2.id)
     expect(updatedSpectator2?.whatchedFilms.length).toBe(2)
   })
+  test('addWhactchedFilm  should return null if spectator is invalid', async () => {
+    const film = await filmRepository.addFilm({
+      title: 'a title',
+      author: 'an author',
+      director: 'a director'
+    })
+    const updatedSpectator2 = await spectatorRepository.addWatchedFilm('51bb793aca2ab77a3200000d', film.id)
+    expect(updatedSpectator2).toBeFalsy()
+  })
 })
