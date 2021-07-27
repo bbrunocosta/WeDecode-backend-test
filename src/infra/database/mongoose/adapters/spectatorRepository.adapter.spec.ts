@@ -50,4 +50,12 @@ describe('MongoSpectatorRepositoryAdapter', () => {
     expect(result3).toBeFalsy()
     expect(result3).toBe(null)
   })
+  test('findOneByName should return a Spectator if it exists', async () => {
+    await spectatorRepository.addSpectator(fakeSpectatorRequest2)
+    await spectatorRepository.addSpectator(fakeSpectatorRequest)
+    const result = await spectatorRepository.findOneByName('bruno')
+    if (result) {
+      expect(result.name).toBe('bruno')
+    }
+  })
 })
