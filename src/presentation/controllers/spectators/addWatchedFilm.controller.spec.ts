@@ -1,5 +1,7 @@
+import FilmNotFoundError from '../../errors/filmNotFoundError'
 import InternalServerError from '../../errors/internalServerError'
 import SpectatorNotFoundError from '../../errors/spectatorNotFoundError'
+import { FilmRepositoryStub } from '../films/filmMocks'
 import AddWatchedFilmController from './addWatchedFilm.controller'
 import { FakeErrorStub, fakeStack, SpectatorRepositoryStub } from './spectatorMocks'
 const fakeHttpRequest = {
@@ -12,7 +14,8 @@ const fakeHttpRequest = {
 }
 describe('AddWatchedFilmController', () => {
   const spectatorRepositoryStub = new SpectatorRepositoryStub()
-  const addWatchedFilmController = new AddWatchedFilmController(spectatorRepositoryStub)
+  const filmRepositoryStub = new FilmRepositoryStub()
+  const addWatchedFilmController = new AddWatchedFilmController(spectatorRepositoryStub, filmRepositoryStub)
   test('Should return 400 if Spectator was not found', async () => {
     const addWatchedFilmSpy = jest.spyOn(spectatorRepositoryStub, 'addWatchedFilm')
     addWatchedFilmSpy.mockImplementationOnce(() => { throw new SpectatorNotFoundError('spectator id') })
@@ -21,10 +24,28 @@ describe('AddWatchedFilmController', () => {
     expect(httpResponse.status).toBe(400)
     expect(httpResponse.body).toEqual(new SpectatorNotFoundError('spectator id'))
   })
-  test('Should return 204 on success', async () => {
+  test('Should return 400 if film was not found', async () => {
+    jest.spyOn(filmRepositoryStub, 'findOneById').mockReturnValueOnce(Promise.resolve(null))
     const httpResponse = await addWatchedFilmController.handle(fakeHttpRequest)
-    expect(httpResponse.status).toBe(204)
-    expect(httpResponse.body).toEqual({})
+    expect(httpResponse.status).toBe(400)
+    expect(httpResponse.body).toEqual(new FilmNotFoundError(fakeHttpRequest.body.filmId))
+  })
+  test('Should call addWatchedFilm and addSpectator with correct values', async () => {
+    const addWatchedFilmSpy = jest.spyOn(spectatorRepositoryStub, 'addWatchedFilm')
+    const addSpectatorSpy = jest.spyOn(filmRepositoryStub, 'addSpectator')
+    await addWatchedFilmController.handle(fakeHttpRequest)
+    expect(addWatchedFilmSpy).toHaveBeenCalledWith(fakeHttpRequest.params.id, fakeHttpRequest.body.filmId)
+    expect(addSpectatorSpy).toHaveBeenCalledWith(fakeHttpRequest.body.filmId, fakeHttpRequest.params.id)
+  })
+  test('Should return 201 on success', async () => {
+    const httpResponse = await addWatchedFilmController.handle(fakeHttpRequest)
+    expect(httpResponse.status).toBe(201)
+    expect(httpResponse.body).toEqual({
+      id: 'a valid id',
+      name: 'a valid name',
+      whatchedFilms: [fakeHttpRequest.body.filmId],
+      'created-at': 'valid timestamp'
+    })
   })
   test('Should return 500 if SpectatorRepository throws', async () => {
     jest.spyOn(spectatorRepositoryStub, 'addWatchedFilm').mockImplementationOnce(() => { throw new FakeErrorStub() })
