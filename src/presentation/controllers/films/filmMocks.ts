@@ -1,5 +1,6 @@
 import { FilmRepository } from '../../../data/protocols/films/film.repository.protocol'
 import { Film } from '../../../domain/film'
+import { Validator } from '../../helpers/validator/validator.protocol'
 
 export const fakeFilmData: Film = {
   id: 'a valid id',
@@ -22,6 +23,11 @@ export class FakeErrorStub extends Error {
   constructor () {
     super()
     this.stack = fakeStack
+  }
+}
+export class ValidationStub implements Validator {
+  validate (input: any): Error | undefined {
+    return undefined
   }
 }
 export class FilmRepositoryStub implements FilmRepository {
