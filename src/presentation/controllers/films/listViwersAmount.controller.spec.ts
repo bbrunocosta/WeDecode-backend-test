@@ -35,4 +35,10 @@ describe('ListFilms', () => {
     await listfilms.handle(fakeHttpRequest)
     expect(validateSpy).toHaveBeenCalledWith(fakeHttpRequest.params)
   })
+  test('sould return 400 if  validate returns error', async () => {
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new Error('any'))
+    const httpResponse = await listfilms.handle(fakeHttpRequest)
+    expect(httpResponse.status).toBe(400)
+    expect(httpResponse.body).toEqual(new Error('any'))
+  })
 })
