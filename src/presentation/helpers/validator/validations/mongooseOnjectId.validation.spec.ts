@@ -15,4 +15,10 @@ describe('Mongoose ObjectId Validation', () => {
     const result = mongooseValidation.validate({ id })
     expect(result).toEqual(new InvalidParamError(id))
   })
+  test('Should return undefined isValidObjectId returns true', () => {
+    jest.spyOn(mongoose, 'isValidObjectId').mockReturnValueOnce(true)
+    const id = 'invalidid'
+    const result = mongooseValidation.validate({ id })
+    expect(result).toBeFalsy()
+  })
 })
