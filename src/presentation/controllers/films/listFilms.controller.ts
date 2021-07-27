@@ -1,9 +1,10 @@
 import { FilmRepository } from '../../../data/protocols/films/film.repository.protocol'
 import InternalServerError from '../../errors/internalServerError'
 import { serverError, success } from '../../helpers/httpResponse.helper'
+import { Controller } from '../../protocols/controller.protocol'
 import { HttpRequest, HttpResponse } from '../../protocols/http.protocol'
 
-class ListFilmsController {
+class ListFilmsController implements Controller {
   constructor (private readonly filmRepository: FilmRepository) {}
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {

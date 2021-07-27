@@ -2,11 +2,12 @@ import { FilmRepository } from '../../../data/protocols/films/film.repository.pr
 import FilmNotFoundError from '../../errors/filmNotFoundError'
 import InternalServerError from '../../errors/internalServerError'
 import { badRequest, serverError, success } from '../../helpers/httpResponse.helper'
+import { Controller } from '../../protocols/controller.protocol'
 import { HttpRequest, HttpResponse } from '../../protocols/http.protocol'
 
-class ListViwersAmountController {
-  constructor (private readonly filmRepository: FilmRepository) {}
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+class ListViwersAmountController implements Controller {
+  constructor(private readonly filmRepository: FilmRepository) { }
+  async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const { id } = httpRequest.params
       const film = await this.filmRepository.findOneById(id)

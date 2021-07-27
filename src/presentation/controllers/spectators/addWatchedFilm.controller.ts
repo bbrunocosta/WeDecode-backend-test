@@ -4,9 +4,10 @@ import FilmNotFoundError from '../../errors/filmNotFoundError'
 import InternalServerError from '../../errors/internalServerError'
 import SpectatorNotFoundError from '../../errors/spectatorNotFoundError'
 import { badRequest, created, serverError } from '../../helpers/httpResponse.helper'
+import { Controller } from '../../protocols/controller.protocol'
 import { HttpRequest, HttpResponse } from '../../protocols/http.protocol'
 
-class AddWatchedFilmController {
+class AddWatchedFilmController implements Controller {
   constructor (
     private readonly spectatorRepository: SpectatorRepository,
     private readonly filmRepository: FilmRepository

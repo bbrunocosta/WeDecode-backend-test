@@ -2,9 +2,10 @@ import { SpectatorRepository } from '../../../data/protocols/spectators/spectato
 import InternalServerError from '../../errors/internalServerError'
 import SpectatorAlreadyExistsError from '../../errors/spectatorAlreadyExists'
 import { conflict, created, serverError } from '../../helpers/httpResponse.helper'
+import { Controller } from '../../protocols/controller.protocol'
 import { HttpRequest, HttpResponse } from '../../protocols/http.protocol'
 
-class AddSpectatorController {
+class AddSpectatorController implements Controller {
   constructor (private readonly spectatorRepository: SpectatorRepository) {}
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {

@@ -2,9 +2,10 @@ import { FilmRepository } from '../../../data/protocols/films/film.repository.pr
 import FilmTitleAlreadyExistsError from '../../errors/filmTitleAlreadyExistsError'
 import InternalServerError from '../../errors/internalServerError'
 import { conflict, created, serverError } from '../../helpers/httpResponse.helper'
+import { Controller } from '../../protocols/controller.protocol'
 import { HttpRequest, HttpResponse } from '../../protocols/http.protocol'
 
-class AddFilmController {
+class AddFilmController implements Controller {
   constructor (private readonly filmRepository: FilmRepository) {}
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
