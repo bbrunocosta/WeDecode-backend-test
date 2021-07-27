@@ -34,4 +34,8 @@ describe('MongooseFilmRepositoryAdapter', () => {
     const result = await filmRepository.getAll()
     expect(result.length).toBe(2)
   })
+  test('getAll should return empty array if any film was found', async () => {
+    const result = await filmRepository.getAll()
+    expect(result).toEqual([])
+  })
 })
