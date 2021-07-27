@@ -32,4 +32,9 @@ describe('ListWatchedFilmsController', () => {
     expect(httpResponse.status).toBe(500)
     expect(httpResponse.body).toEqual(new InternalServerError(fakeStack))
   })
+  test('should call validate with correct values', async () => {
+    const validateSpy = jest.spyOn(validationStub, 'validate')
+    await listWatchedFilmsController.handle(fakeHttpRequest)
+    expect(validateSpy).toHaveBeenCalledWith(fakeHttpRequest.params)
+  })
 })
