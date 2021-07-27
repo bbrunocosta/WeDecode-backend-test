@@ -1,3 +1,4 @@
 import { filmSchema } from '../schemas/films.schema'
 import mongoose from 'mongoose'
-export const FilmModel = mongoose.model('Films', filmSchema)
+import { Film } from '../../../../domain/film'
+export const FilmModel = mongoose.model<Film>('Films', filmSchema)
