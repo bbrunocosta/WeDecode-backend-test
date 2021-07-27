@@ -20,4 +20,9 @@ describe('Validation Composite', () => {
     const error = sut.validate(fakeData)
     expect(error).toEqual(undefined)
   })
+  test('should call validate with correct data', () => {
+    const validateSpy = jest.spyOn(validationStub, 'validate')
+    sut.validate(fakeData)
+    expect(validateSpy).toHaveBeenCalledWith(fakeData)
+  })
 })
