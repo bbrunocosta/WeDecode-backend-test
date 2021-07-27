@@ -67,4 +67,9 @@ describe('MongooseFilmRepositoryAdapter', () => {
     const result = await filmRepository.findOneByTitle('a tile3')
     expect(result).toBe(null)
   })
+  test('addSpectator shourld return null if film was not found', async () => {
+    const result3 = await filmRepository.addSpectator('51bb793aca2ab77a3200000d', '51bb793aca2ab77a3200000d')
+    expect(result3).toBeFalsy()
+    expect(result3).toBe(null)
+  })
 })
