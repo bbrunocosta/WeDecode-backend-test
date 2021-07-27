@@ -16,4 +16,8 @@ describe('Validation Composite', () => {
     const error = sut.validate(fakeData)
     expect(error).toEqual(fakeError)
   })
+  test('should return undefined on sucess', () => {
+    const error = sut.validate(fakeData)
+    expect(error).toEqual(undefined)
+  })
 })
