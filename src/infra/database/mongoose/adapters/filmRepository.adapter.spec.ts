@@ -72,4 +72,10 @@ describe('MongooseFilmRepositoryAdapter', () => {
     expect(result3).toBeFalsy()
     expect(result3).toBe(null)
   })
+  test('addSpectator shourld add an spectorId to spectator array on sucess', async () => {
+    const film = await filmRepository.addFilm(fakeFilmRequest2)
+    const result3 = await filmRepository.addSpectator(film.id, '51bb793aca2ab77a3200000d')
+    expect(result3?.spectators[0]).toBeTruthy()
+    expect(result3?.spectators.length).toBe(1)
+  })
 })
