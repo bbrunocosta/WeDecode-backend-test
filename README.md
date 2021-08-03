@@ -61,7 +61,7 @@ uri: "/api/films"
 ### VER A LISTA DE ESPECTADORES QUE UM FILME TEM JUNTO COM A QUANTIDADE DISTINTA
 ```javascript
 método: GET 
-uri: "/api/films/:film-id" 
+uri: "/api/films/audience/:film-id" 
 ```
 
 ### INSERIR UM NOVO ESPECTADOR
@@ -83,7 +83,7 @@ uri: "/api/spectators"
 ### MARCAR UM FILME COMO ASSISTIDO
 ```javascript
 método: POST 
-uri: "/api/spectators/:spectator-id"
+uri: "/api/spectators/films/:spectator-id"
 body: {
   filmId: 'id do filme que deseja adicionar'
 }
@@ -92,11 +92,11 @@ body: {
 ### VER QUANTOS E QUAIS FILMES UM ESPECTADOR ASSISTIU
 ```javascript
 método: GET 
-uri: "/api/spectators/films/{spectator-id}"
+uri: "/api/spectators/films/:spectator-id"
 ```
 
 ### VER QUANTOS ESPECTADORES UM FILME TEVE E QUAIS SAO ELES
 ```javascript
 método: GET 
-uri: "/api/films/audience/{film-id}"
+uri: "/api/films/audience/:film-id"
 ```
